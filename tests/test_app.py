@@ -39,3 +39,16 @@ def test_read_root_should_have_message_key():
 
     # Assert
     assert expected_key in response.json()
+
+
+def test_exercicio_ola_mundo_em_html():
+    # Arrange
+    client = TestClient(app)
+
+    # Act
+    response = client.get('/pedro')
+
+    # Assert
+    assert response.status_code == HTTPStatus.OK
+    assert '<h1> Olá Mundo </h1>' in response.text
+    assert 'text/html' in response.headers['content-type']
