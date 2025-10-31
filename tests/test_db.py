@@ -1,11 +1,13 @@
+from dataclasses import asdict
+
 from sqlalchemy import select
 
 from fastapi_zero.models.models import User
 
 
-def test_create_user(session):  # Recebe a fixture como parâmetro
-    # Arrange
-    user = User(
+def test_create_user(session, mock_db_time):
+    with mock_db_time(model=User) as time:
+        user = User(
         username='pedros', password='senha123', email='pedros@example.com'
     )
 
@@ -16,7 +18,11 @@ def test_create_user(session):  # Recebe a fixture como parâmetro
     # Assert
     result = session.scalar(select(User).where(User.username == 'pedros'))
 
-    assert result is not None
-    assert result.id == 1
-    assert result.username == 'pedros'
-    assert result.email == 'pedros@example.com'
+    assert asdict(result) == {
+        'id': 1,
+        'username': 'pedros',
+        'password': 'senha123',
+        'email': 'pedros@example.com',
+        'created_at': time,
+        'updated_at': time,
+    }
