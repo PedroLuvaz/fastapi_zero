@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi import FastAPI, HTTPException
 
-from fastapi_zero.schemas import (
+from fastapi_zero.schemas.schemas import (
     Message,
     UserDB,
     UserList,
@@ -15,7 +15,6 @@ app = FastAPI()
 # fakebd
 
 database = []
-
 
 @app.get('/', status_code=HTTPStatus.OK, response_model=Message)
 def read_root():

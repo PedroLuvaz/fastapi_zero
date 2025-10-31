@@ -1,20 +1,23 @@
 # FastAPI Zero
 
-Projeto de estudo do framework FastAPI seguindo o padrão AAA (Arrange-Act-Assert) para testes. Pequeno template para APIs com foco em testes, linting e automação por tarefas.
+Projeto de estudo do framework FastAPI seguindo o padrão AAA (Arrange-Act-Assert) para testes. Template completo para APIs RESTful com banco de dados SQLAlchemy, autenticação e testes automatizados.
 
 ## 🚀 Tecnologias
 
-- FastAPI — framework ASGI moderno
-- Uvicorn — servidor ASGI para desenvolvimento
-- Pytest — framework de testes (padrão AAA)
-- Ruff — linter e formatador rápido
-- Taskipy — gerenciador de tarefas leve
-- Poetry — gerenciamento de dependências e ambiente
+- **FastAPI** - Framework web moderno e rápido para construção de APIs
+- **SQLAlchemy** - ORM para gerenciamento de banco de dados
+- **Pydantic** - Validação de dados e settings
+- **Alembic** - Migrações de banco de dados
+- **Pytest** - Framework de testes (padrão AAA)
+- **Pytest-cov** - Cobertura de testes
+- **Ruff** - Linter e formatador de código Python
+- **Taskipy** - Gerenciador de tarefas
+- **Poetry** - Gerenciamento de dependências e ambiente virtual
 
 ## 📋 Pré-requisitos
 
 - Python >= 3.13
-- Poetry instalado
+- Poetry (gerenciador de dependências)
 - Git (para clonar o repositório)
 
 ## 🔧 Instalação
@@ -22,7 +25,7 @@ Projeto de estudo do framework FastAPI seguindo o padrão AAA (Arrange-Act-Asser
 1. Clone o repositório:
 ```bash
 git clone <url-do-repositorio>
-cd fastapi_zero
+cd Curso_FastAPI
 ```
 
 2. Instale as dependências (com Poetry):
