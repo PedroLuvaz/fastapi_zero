@@ -87,7 +87,7 @@ profile_default/
 ipython_config.py
 
 # Database
-tests/database.db
+database.db
 
 
 # pyenv
