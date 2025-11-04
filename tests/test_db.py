@@ -1,28 +1,50 @@
-from dataclasses import asdict
-
-from sqlalchemy import select
-
-from fastapi_zero.models.models import User
+from http import HTTPStatus
 
 
-def test_create_user(session, mock_db_time):
-    with mock_db_time(model=User) as time:
-        user = User(
-        username='pedros', password='senha123', email='pedros@example.com'
+def test_create_user_aprimorate(client):
+    response = client.post(
+        '/users/',
+        json={
+            'username': 'pedros',
+            'password': 'senha123',
+            'email': 'pedros@example.com',
+        },
     )
-
-    # Act
-    session.add(user)
-    session.commit()
-
-    # Assert
-    result = session.scalar(select(User).where(User.username == 'pedros'))
-
-    assert asdict(result) == {
-        'id': 1,
+    assert response.status_code == HTTPStatus.CREATED
+    assert response.json() == {
         'username': 'pedros',
-        'password': 'senha123',
         'email': 'pedros@example.com',
-        'created_at': time,
-        'updated_at': time,
+        'id': 1,
     }
+
+
+def test_read_users(client):
+    response = client.get('/users/')
+    assert response.status_code == HTTPStatus.OK
+    assert response.json() == {'users': []}
+
+
+def test_update_user(client, user):
+    response = client.put(
+        '/users/1',
+        json={
+            'username': 'bob',
+            'email': 'bob@example.com',
+            'password': 'mynewpassword',
+        },
+    )
+    assert response.status_code == HTTPStatus.OK
+    assert response.json() == {
+        'username': 'bob',
+        'email': 'bob@example.com',
+        'id': 1,
+    }
+
+    client.put(
+        f'/users/{user.id}',
+        json={
+            'username': 'fausto',
+            'email': 'bob@example.com',
+            'password': 'mynewpassword',
+        },
+    )
